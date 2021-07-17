@@ -19,5 +19,12 @@ namespace ToDoList.Logic
         public Task(string Name, string Description)
             : this(Name, Description, false)
         { }
+
+        public override string ToString()
+        {
+            return "Task: " + Name + "\n" +
+                   "\tDesc: " + Description + "\n" +
+                   "\tIs done: [" + (IsChecked ? 'x' : ' ') + "]\n\n";
+        }
     }
 }

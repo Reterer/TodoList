@@ -17,9 +17,9 @@ namespace ToDoList.Logic
         {
             get => new ReadOnlyCollection<Task>(ListOfTasks_);
         }
-        static public void AddTask(Task task)
+        static public void AddTask(int idx, Task task)
         {
-            ListOfTasks_.Add(task);
+            ListOfTasks_.Insert(idx, task);
         }
 
         static public void RemoveTask(int idxOfTask)
