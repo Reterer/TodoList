@@ -8,5 +8,6 @@ namespace ToDoList.UI.Menu
     {
         static public ConsoleColor HighlightColorBg = ConsoleColor.DarkMagenta;
         static public ConsoleColor DefaultColorBg = ConsoleColor.Black;
+        static public ConsoleColor CurrCharColorBg = ConsoleColor.DarkCyan;
     }
 }

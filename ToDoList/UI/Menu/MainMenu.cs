@@ -11,7 +11,7 @@ namespace ToDoList.UI.Menu
         public MainMenu()
             : base()
         {
-            // Обработчики Нажатий клавиш
+            // Обработчики Нажатий клавиш Для основного меню
             OnInput = InputAdd;
             OnInput += InputRemove;
             OnInput += InputCheck;
@@ -19,6 +19,8 @@ namespace ToDoList.UI.Menu
             OnInput += InputExit;
             OnInput += InputDown;
             OnInput += InputUp;
+
+            // Обработчики Нажатий клавиш Для Информационного меню
 
             // Копоненты меню, отображаемые в терминале
             UIComponents.Add("TaskBoardPanel", 
@@ -42,9 +44,11 @@ namespace ToDoList.UI.Menu
             if (idxOfCurrTask < 0 || idxOfCurrTask >= Logic.Logic.ListOfTasks.Count)
                 idxOfCurrTask = 0;
         }
-        public override void Update(ConsoleKey key)
+        public override void Update(ConsoleKeyInfo keyInfo)
         {
             Fixed();
+
+            ConsoleKey key = keyInfo.Key;
             OnInput?.Invoke(key);
         }
         public override void Draw(Frame frame)
@@ -62,14 +66,23 @@ namespace ToDoList.UI.Menu
             // Распечатка информации о выбранной задаче
             var currTask = Logic.Logic.ListOfTasks[idxOfCurrTask];
 
-            var NameLabel = new Components.Label(currTask.Name, 42, 2);
-            var DescriptionLabel = new Components.Label(currTask.Description, 42, 5);
-            var IsChecked = new Components.Label(currTask.IsChecked ? "[x]" : "[ ]", 42, 25);
+            string NameStr = $"Задача: ";
+            string DescriptionStr = $"Описание: ";
+            string CheckStr = "Статус: " + (currTask.IsChecked ? "[x]" : "[ ]");
+
+            var NameLabel = new Components.Label(NameStr, 42, 2);
+            var DescriptionLabel = new Components.Label(DescriptionStr, 42, 5);
+            var IsChecked = new Components.Label(CheckStr, 42, 25);
 
             NameLabel.Draw(frame);
             DescriptionLabel.Draw(frame);
             IsChecked.Draw(frame);
 
+            var NameTaskLabel = new Components.Label(currTask.Name, 50, 2, 49);
+            var DescriptionTaskLabel = new Components.Label(currTask.Description, 52, 5, 47);
+
+            NameTaskLabel.Draw(frame);
+            DescriptionTaskLabel.Draw(frame);
         }
 
         private void DrawListOfTasks(Frame frame)
@@ -125,11 +138,12 @@ namespace ToDoList.UI.Menu
 
         private void InputEdite(ConsoleKey key)
         {
-            if (key != ConsoleKey.Enter || key != ConsoleKey.E)
+            if (key != ConsoleKey.Enter && key != ConsoleKey.E && key != ConsoleKey.L)
                 return;
             if (Logic.Logic.ListOfTasks.Count == 0)
                 return;
 
+            UI.OpenMenu(new InfoEditorMenu(idxOfCurrTask));
         }
 
         private void InputExit(ConsoleKey key)

@@ -15,7 +15,7 @@ namespace ToDoList.UI.Menu
             OnInput = null;
         }
 
-        abstract public void Update(ConsoleKey key);
+        abstract public void Update(ConsoleKeyInfo keyInfo);
         abstract public void Draw(Frame frame);
         protected void DrawComponetns(Frame frame)
         {

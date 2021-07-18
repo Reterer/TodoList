@@ -60,8 +60,8 @@ namespace ToDoList.UI.Menu
 
         private void NewMethod(Frame frame)
         {
-            var YesBtn = new Components.Label(" ДА ", 44, 23);
-            var NoBtn = new Components.Label(" НЕТ ", 52, 23);
+            var YesBtn = new Components.Label(" ДА ", 44, 23, 4);
+            var NoBtn = new Components.Label(" НЕТ ", 52, 23, 5);
 
             if (IsActiveYes)
             {
@@ -78,9 +78,9 @@ namespace ToDoList.UI.Menu
             NoBtn.Draw(frame);
         }
 
-        public override void Update(ConsoleKey key)
+        public override void Update(ConsoleKeyInfo keyInfo)
         {
-            OnInput?.Invoke(key);
+            OnInput?.Invoke(keyInfo.Key);
         }
     }
 }

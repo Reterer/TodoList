@@ -56,11 +56,11 @@ namespace ToDoList.UI.Components
             SetChar(frame, '╝', X + W, Y + H);
 
             // Заполняем внутренее простарнство
-            for(int x = X + 1; x < W + X; ++x)
+            for(int x = 1; x < W; ++x)
             {
-                for(int y = Y + 1; y < H + Y; ++y)
+                for(int y = 1; y < H; ++y)
                 {
-                    SetChar(frame, ' ', x, y);
+                    SetChar(frame, ' ', x + X, y + Y);
                 }
             }
         }

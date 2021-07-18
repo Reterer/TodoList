@@ -32,29 +32,30 @@ namespace ToDoList.UI.Components
 
         public override void Draw(Frame frame)
         {
+            int y = MaxW == -1 ? Y : Y -1;
+            int x = X - 1;
             for (int i = 0; i < Text.Length; ++i)
             {
-                if (i + X >= frame.W)
-                    break;
-                if (MaxW != -1 && i + X >= MaxW)
-                    break;
+                if (MaxW != -1  && i % MaxW == 0)
+                {
+                    y++;
+                    x = X;
+                }
+                else
+                    x++;
 
-                frame[Y, i + X].Char = Text[i];
-                frame[Y, i + X].ForeGroundColor = ForegroundColor;
-                frame[Y, i + X].BackGroundColor = BackgroundColor;
+                frame[y, x].Char = Text[i];
             }
 
-            for (int i = Text.Length; i < MaxW; ++i)
-            {
-                if (MaxW == -1)
-                    break;
-                if (i + X >= frame.W)
-                    break;
+            for (int j = 0; j < (Text.Length + MaxW - 1) / MaxW; ++j)
+                for (int i = 0; i < MaxW; ++i)
+                {
+                    if (MaxW == -1)
+                        break;
 
-                frame[Y, i + X].Char = ' ';
-                frame[Y, i + X].ForeGroundColor = ForegroundColor;
-                frame[Y, i + X].BackGroundColor = BackgroundColor;
-            }
+                    frame[Y + j, i + X].ForeGroundColor = ForegroundColor;
+                    frame[Y + j, i + X].BackGroundColor = BackgroundColor;
+                }
         }
     }
 }

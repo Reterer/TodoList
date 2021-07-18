@@ -39,11 +39,14 @@ namespace ToDoList.UI
             while (IsRun)
             {
                 // Обработка пользовательского ввода
-                ConsoleKey key = Console.ReadKey().Key;
-                CurrMenu?.Update(key);
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                CurrMenu?.Update(keyInfo);
 
                 // Отрисовка
+                foreach (var menu in StackOfMenu)
+                    menu.Draw(CurrFrame);
                 CurrMenu?.Draw(CurrFrame);
+
                 UpdateConsole();
             }
         }
@@ -59,25 +62,23 @@ namespace ToDoList.UI
                         Console.ForegroundColor = CurrFrame[y, x].ForeGroundColor;
                         Console.BackgroundColor = CurrFrame[y, x].BackGroundColor;
                         Console.Write(CurrFrame[y, x].Char);
-
-                        PrevFrame[y, x].Char = CurrFrame[y, x].Char;
-                        PrevFrame[y, x].ForeGroundColor = CurrFrame[y, x].ForeGroundColor;
-                        PrevFrame[y, x].BackGroundColor = CurrFrame[y, x].BackGroundColor;
                     }
+                    PrevFrame[y, x].Char = CurrFrame[y, x].Char;
+                    PrevFrame[y, x].ForeGroundColor = CurrFrame[y, x].ForeGroundColor;
+                    PrevFrame[y, x].BackGroundColor = CurrFrame[y, x].BackGroundColor;
+
+                    CurrFrame[y, x].Char = ' ';
+                    CurrFrame[y, x].ForeGroundColor = ConsoleColor.White;
+                    CurrFrame[y, x].BackGroundColor = ConsoleColor.Black;
                 }
             }
             Console.SetCursorPosition(0, maxH);
-
-            Frame temp = CurrFrame;
-            CurrFrame = PrevFrame;
-            PrevFrame = temp;
         }
 
         static public void OpenMenu(Menu.Menu menu)
         {
             StackOfMenu.Push(CurrMenu);
             CurrMenu = menu;
-            UpdateConsole();
         }
 
         static public void CloseCurrMenu()
@@ -89,7 +90,6 @@ namespace ToDoList.UI
                 IsRun = false;
                 CurrMenu = null;
             }
-            UpdateConsole();
         }
     }
 }
