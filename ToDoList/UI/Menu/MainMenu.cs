@@ -19,6 +19,8 @@ namespace ToDoList.UI.Menu
             OnInput += InputExit;
             OnInput += InputDown;
             OnInput += InputUp;
+            OnInput += InputSave;
+            OnInput += InputLoad;
 
             // Обработчики Нажатий клавиш Для Информационного меню
 
@@ -106,7 +108,19 @@ namespace ToDoList.UI.Menu
                 Label.Y += 2;
             }
         }
+        private void InputLoad(ConsoleKey key)
+        {
+            if (key != ConsoleKey.O)
+                return;
+            Logic.Logic.Load("save.bin");
+        }
 
+        private void InputSave(ConsoleKey key)
+        {
+            if (key != ConsoleKey.S)
+                return;
+            Logic.Logic.Save("save.bin");
+        }
         private void InputAdd(ConsoleKey key)
         {
             if (key != ConsoleKey.A)

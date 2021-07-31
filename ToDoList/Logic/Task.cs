@@ -2,6 +2,7 @@
 
 namespace ToDoList.Logic
 {
+    [Serializable]
     class Task
     {
         public String Name { get; set; }

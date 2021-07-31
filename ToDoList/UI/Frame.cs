@@ -6,18 +6,23 @@ namespace ToDoList.UI
 {
     class Frame
     {
-        private int w;
-        private int h;
-
-        public int W => w;
-        public int H => h;
+        public int W
+        {
+            get;
+            private set;
+        }
+        public int H
+        {
+            get;
+            private set;
+        }
 
         private ConsoleCharacter[,] data;
 
         public Frame(int h, int w)
         {
-            this.w = w;
-            this.h = h;
+            this.W = w;
+            this.H = h;
 
             data = new ConsoleCharacter[h, w];
             for(int i = 0; i < h; ++i)

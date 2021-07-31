@@ -73,7 +73,7 @@ namespace ToDoList.UI.Components
                 if (currPos == Text.Length)
                     Text.Append(keyInfo.KeyChar);
                 else
-                    Text[currPos] = keyInfo.KeyChar;
+                    Text.Insert(currPos, keyInfo.KeyChar);
                 CurrPos++;
             }
         }
